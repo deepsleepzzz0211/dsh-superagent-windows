@@ -109,3 +109,14 @@ LARK_MSYS_ROOT=D:/Git/    # 若 PATH 里的 sh 来自 Git Bash（DSH 经它启�
 | 回复报 `Unexpected end of JSON input` | 旧版 wrapper 的引号问题，换 Releases 里的最新 exe |
 | 飞书补收报 `230027` | 开通 `im:message.group_msg` 并发布新版本（第 4.1 节第 2 条） |
 | 重启后 orchestrator 不恢复 | 清 `<stateDir>` 同级的 `superagent.lock` 空目录（强杀残留） |
+
+## 6. 从 Git 直装（可选）
+
+`dsh plugin --profile superagent add github:deepsleepzzz0211/dsh-superagent-windows` 拉取的是**源码**，首次 add 会被 pnpm ≥10 拦下要求允许构建脚本——按提示把包键加入 profile 的 `pnpm-workspace.yaml`：
+
+```yaml
+allowBuilds:
+  dsh-superagent: true
+```
+
+再重新 add 即可（`prepare` 脚本会现场构建 lib）。不想授权构建就用 Release 的 tgz（已预构建，无需任何许可）。建议钉住 commit：`github:deepsleepzzz0211/dsh-superagent-windows#<sha>`。

@@ -2,7 +2,7 @@
   "name": "dsh-superagent",
   "author": "DeepSeek Harness Team <team@dsh.dev>",
   "license": "MIT",
-  "version": "0.1.0-windows.1",
+  "version": "0.2.0",
   "private": true,
   "description": "dsh-superagent research prototype, Windows adaptation (upstream + windows-compat + worker TLS fixes)",
   "type": "module",
@@ -48,7 +48,8 @@
     "build": "tsdown",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "check": "pnpm typecheck && pnpm test && pnpm build"
+    "check": "pnpm typecheck && pnpm test && pnpm build",
+    "prepare": "tsdown"
   },
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
@@ -121,5 +122,13 @@
     "react-dom": "18.3.1",
     "@types/react-dom": "18.3.7",
     "@deepseek-ai/dsh-subprocess": "0.2.1-alpha.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deepsleepzzz0211/dsh-superagent-windows.git"
+  },
+  "homepage": "https://github.com/deepsleepzzz0211/dsh-superagent-windows#readme",
+  "bugs": {
+    "url": "https://github.com/deepsleepzzz0211/dsh-superagent-windows/issues"
   }
 }
