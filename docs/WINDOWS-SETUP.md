@@ -4,11 +4,18 @@
 
 ## 1. 安装插件
 
+**必须先从 web 模板创建 profile**——`dsh plugin add` 新建的 profile 是最小模板（只有 dsh-base，没有 web 应用/webserver），superagent 会一直等待服务、永不激活：
+
 ```sh
-dsh plugin --profile superagent add "github:https://github.com/deepsleepzzz0211/dsh-superagent-windows"
+dsh superagent --from-default-profile web --dump-config > /dev/null
 ```
 
-（或从 Releases 下载 `dsh-superagent-windows.tgz` 后 `dsh plugin --profile superagent add <tgz路径>`；也可在 DSH Desktop 的插件市场里从 GitHub 添加。）
+然后安装插件（二选一）：
+
+```sh
+dsh plugin --profile superagent add "github:https://github.com/deepsleepzzz0211/dsh-superagent-windows"
+dsh plugin --profile superagent add <path-to>\dsh-superagent-windows.tgz   # 从 Releases 下载
+```
 
 在 profile 的 `cordis.patch.yml` 追加：
 

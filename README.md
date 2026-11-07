@@ -25,11 +25,13 @@ DeepSeek 官方 [dsh-superagent 原型](https://github.com/deepseek-ai/dsh-super
 前置：Node.js 22.19+ 或 24+、git 2.32+、GitHub CLI 2.48+、DeepSeek Harness（DSH Desktop 或 CLI）。
 
 ```sh
-# 方式一：插件市场 / CLI 从 GitHub Release 安装
-dsh plugin --profile superagent add "github:https://github.com/deepsleepzzz0211/dsh-superagent-windows"
+# 第 1 步（必须先做）：从 web 模板创建 profile —— 直接 `dsh plugin add` 新建的是最小
+# profile（没有 web 应用/webserver），superagent 会永远等待服务不激活
+dsh superagent --from-default-profile web --dump-config > /dev/null
 
-# 方式二：手动下载 Release 里的 dsh-superagent-windows.tgz
-dsh plugin --profile superagent add <path-to>\dsh-superagent-windows.tgz
+# 第 2 步：安装插件（二选一）
+dsh plugin --profile superagent add "github:https://github.com/deepsleepzzz0211/dsh-superagent-windows"
+dsh plugin --profile superagent add <path-to>\dsh-superagent-windows.tgz   # Release 下载
 ```
 
 然后在 profile 的 `cordis.patch.yml` 里加（**stateDir 必须是盘符绝对路径**）：
