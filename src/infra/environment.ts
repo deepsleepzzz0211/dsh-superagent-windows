@@ -113,6 +113,11 @@ export async function writeEnvironment(deployment: Pick<Deployment, 'stateDir' |
     '[url "https://github.com/"]', '\tinsteadOf = git@github.com:', '\tinsteadOf = ssh://git@github.com/',
     // Include Git LFS filters because the operator's global gitconfig (which usually holds them) is ignored.
     '[filter "lfs"]', '\tclean = git-lfs clean -- %f', '\tsmudge = git-lfs smudge -- %f', '\tprocess = git-lfs filter-process', '\trequired = true',
+    // This file replaces the operator's global gitconfig and GIT_CONFIG_NOSYSTEM=1 skips the system one, which on
+    // Windows git installs `http.sslBackend = schannel`; without it workers fall to OpenSSL and TLS to github.com can
+    // fail its revocation check (CRYPT_E_NO_REVOCATION_CHECK). Pin the backend and keep the operator's usual
+    // `schannelCheckRevoke = false` (common where CRL endpoints are unreachable).
+    ...(process.platform === 'win32' ? ['[http]', '\tsslBackend = schannel', '\tschannelCheckRevoke = false'] : []),
   ].join('\n') + '\n')
 }
 
